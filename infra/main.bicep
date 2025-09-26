@@ -348,7 +348,7 @@ module workspace 'br/public:avm/res/machine-learning-services/workspace:0.13.0' 
   scope: rg
   params: {
     name: shortWorkspaceName
-    sku: 'Basic'
+    sku: 'Standard'
     associatedApplicationInsightsResourceId: applicationInsights.outputs.resourceId
     associatedKeyVaultResourceId: vault.outputs.resourceId
     associatedStorageAccountResourceId: storageAccount.outputs.resourceId
@@ -416,60 +416,6 @@ module workspace 'br/public:avm/res/machine-learning-services/workspace:0.13.0' 
     }
   }
 }
-
-// // Storage Table Data Contributor: 0a9a7e1f-b9d0-4cc4-a60d-0319b160aaa3
-// module amlIdentityRoleStorageTableDataContributor 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = {
-//   name: 'amlIdentityRoleStorageTableDataContributorDeployment'
-//   scope: rg
-//   params: {
-//     roleName: 'Storage Table Data Contributor'
-//     description: 'Assign Storage Table Data Contributor role to the managed Identity on the ML Workspace'
-//     principalId: workspace.outputs.systemAssignedMIPrincipalId!
-//     resourceId: storageAccount.outputs.resourceId
-//     roleDefinitionId: '0a9a7e1f-b9d0-4cc4-a60d-0319b160aaa3'
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
-// // All three assignments now for the current user
-// module currentUserRoleStorageBlobDataContributor 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = {
-//   name: 'currentUserRoleStorageBlobDataContributorDeployment'
-//   scope: rg
-//   params: {
-//     roleName: 'Storage Blob Data Contributor'
-//     description: 'Assign Storage Blob Data Contributor role to the managed Identity on the ML Workspace'
-//     principalId: currentUserId
-//     resourceId: storageAccount.outputs.resourceId
-//     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
-//     principalType: 'User'
-//   }
-// }
-
-// module currentUserRoleTableDataContributor 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = {
-//   name: 'currentUserRoleTableDataContributorDeployment'
-//   scope: rg
-//   params: {
-//     roleName: 'Storage Table Data Contributor'
-//     description: 'Assign Storage Table Data Contributor role to the managed Identity on the ML Workspace'
-//     principalId: currentUserId
-//     resourceId: storageAccount.outputs.resourceId
-//     roleDefinitionId: '0a9a7e1f-b9d0-4cc4-a60d-0319b160aaa3'
-//     principalType: 'User'
-//   }
-// }
-
-// module currentUserRoleStorageFileDataPrivilegedContributor 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = {
-//   name: 'currentUserRoleStorageFileDataPrivilegedContributorDeployment'
-//   scope: rg
-//   params: {
-//     roleName: 'Storage File Data Privileged Contributor'
-//     description: 'Assign Storage File Data Privileged Contributor role to the managed Identity on the ML Workspace'
-//     principalId: currentUserId
-//     resourceId: storageAccount.outputs.resourceId
-//     roleDefinitionId: '69566ab7-960f-475b-8e7c-b3118f30c6bd'
-//     principalType: 'User'
-//   }
-// }
 
 output RG_NAME string = rg.name
 output WORKSPACE_ID string = workspace.outputs.resourceId
